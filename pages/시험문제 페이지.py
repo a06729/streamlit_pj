@@ -1,4 +1,5 @@
 import streamlit as st
+from db import saveScore
 
 
 di = {
@@ -61,3 +62,8 @@ if len(st.session_state.selectValueList) != 0:
     true_count = sum(1 for value in st.session_state['selectValueList'] if value)
     total_count = len(st.session_state['selectValueList'])
     st.write(f"정답: {true_count}/{total_count}")
+
+submitted=st.button("제출", type="primary")
+if submitted:
+    id=st.session_state.id
+    saveScore(id=id,value=true_count)
